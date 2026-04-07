@@ -58,22 +58,24 @@ export default function CustomSelect({
 
       <button
         type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
         onClick={() => setOpen((prev) => !prev)}
-        className={`
-          flex w-full items-center justify-between rounded-xl border px-4 py-2.5 text-left
-          transition outline-none
-          bg-white text-zinc-900 border-zinc-300
-          hover:border-zinc-400 hover:bg-zinc-50
-          focus:ring-2 focus:ring-blue-500/20
-          dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-700
-          dark:hover:border-zinc-500 dark:hover:bg-zinc-800
-        `}
+        className="
+          flex w-full min-w-0 items-center justify-between rounded-2xl border px-4 py-3 text-left outline-none transition
+          bg-white/80 text-zinc-900 border-zinc-200/80
+          hover:border-sky-300/70 hover:bg-white
+          focus:border-sky-300/80 focus:ring-4 focus:ring-sky-100
+          dark:bg-zinc-900/80 dark:text-zinc-100 dark:border-zinc-700
+          dark:hover:border-cyan-400/50 dark:hover:bg-zinc-900
+          dark:focus:border-cyan-400/60 dark:focus:ring-cyan-500/10
+        "
       >
         <span
           className={
             selected
-              ? 'truncate'
-              : 'truncate text-zinc-500 dark:text-zinc-400'
+              ? 'min-w-0 truncate'
+              : 'min-w-0 truncate text-zinc-500 dark:text-zinc-400'
           }
         >
           {selected?.label ?? placeholder}
@@ -83,9 +85,7 @@ export default function CustomSelect({
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 20 20"
           fill="currentColor"
-          className={`ml-3 h-5 w-5 shrink-0 transition ${
-            open ? 'rotate-180' : ''
-          }`}
+          className={`ml-3 h-5 w-5 shrink-0 transition ${open ? 'rotate-180' : ''}`}
         >
           <path
             fillRule="evenodd"
@@ -97,10 +97,11 @@ export default function CustomSelect({
 
       {open && (
         <div
+          role="listbox"
           className="
-            absolute z-50 mt-2 max-h-64 w-full overflow-y-auto rounded-xl border shadow-lg
-            bg-white border-zinc-200
-            dark:bg-zinc-900 dark:border-zinc-700
+            scrollbar-hide absolute z-50 mt-2 max-h-64 w-full overflow-y-auto rounded-2xl border shadow-[0_18px_40px_rgba(15,23,42,0.12)]
+            bg-white/95 border-zinc-200/80 backdrop-blur-xl
+            dark:bg-zinc-950/95 dark:border-white/10 dark:shadow-[0_0_30px_rgba(0,0,0,0.28)]
           "
         >
           {options.map((option) => {
@@ -115,12 +116,12 @@ export default function CustomSelect({
                   setOpen(false)
                 }}
                 className={`
-                  flex w-full items-center justify-between px-4 py-3 text-left transition
-                  hover:bg-zinc-100 dark:hover:bg-zinc-800
-                  ${isActive ? 'bg-zinc-100 dark:bg-zinc-800' : ''}
+                  flex w-full min-w-0 items-center justify-between px-4 py-3 text-left transition
+                  hover:bg-sky-50 dark:hover:bg-zinc-900
+                  ${isActive ? 'bg-sky-50 text-sky-700 dark:bg-zinc-900 dark:text-cyan-200' : 'text-zinc-800 dark:text-zinc-100'}
                 `}
               >
-                <span className="truncate">{option.label}</span>
+                <span className="min-w-0 truncate">{option.label}</span>
 
                 {isActive && (
                   <svg
