@@ -20,7 +20,9 @@ export default async function WorkshopsPage() {
         <h1 className="text-2xl font-bold">Справочник цехов</h1>
         <Link
           href="/"
-          className="hidden sm:inline-flex items-center justify-center rounded-lg border px-4 py-2 text-center transition hover:bg-gray-200 hover:border-gray-400 hover:text-black"
+          className="hidden sm:inline-flex items-center justify-center rounded-lg border px-4 py-2 text-center transition hover:bg-gray-200 hover:border-gray-400 hover:text-black
+          bg-white text-zinc-900 border-zinc-300
+          dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-700"
         >
           Назад
         </Link>
@@ -31,12 +33,19 @@ export default async function WorkshopsPage() {
           type="text"
           name="workshopname"
           placeholder="Название цеха"
-          className="w-full rounded-lg border px-3 py-2 text-center"
+          className="w-full rounded-lg border px-3 py-2 text-center
+          bg-white text-zinc-900 border-zinc-300
+          dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-700"
           required
         />
         <button
           type="submit"
-          className="rounded-lg border px-4 py-2 transition hover:bg-green-200 hover:border-green-900 hover:text-green-900 cursor-pointer sm:shrink-0"
+          className="rounded-lg border px-4 py-2 transition hover:bg-green-100 
+          hover:border-green-700 hover:text-green-900
+          dark:hover:bg-green-900/20 dark:hover:border-green-500 dark:hover:text-green-300
+          bg-white text-zinc-900 border-zinc-300
+          dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-700
+          cursor-pointer sm:shrink-0"
         >
           Добавить
         </button>

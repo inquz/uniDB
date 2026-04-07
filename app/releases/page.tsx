@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { createClient } from '@/lib/supabase/server'
 import { addRelease, deleteRelease } from './actions'
+import CustomSelect from '@/components/ui/custom-select'
 
 export default async function ReleasesPage() {
   const supabase = await createClient()
@@ -43,7 +44,9 @@ export default async function ReleasesPage() {
 
         <Link
           href="/"
-          className="hidden sm:inline-flex items-center justify-center rounded-lg border px-4 py-2 text-center transition hover:bg-gray-200 hover:border-gray-400 hover:text-black"
+          className="hidden sm:inline-flex items-center justify-center rounded-lg border px-4 py-2 text-center transition hover:bg-gray-200 hover:border-gray-400 hover:text-black
+          bg-white text-zinc-900 border-zinc-300
+          dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-700"
         >
           Назад
         </Link>
@@ -54,50 +57,53 @@ export default async function ReleasesPage() {
         action={addRelease}
         className="mb-8 grid gap-3 rounded-xl border p-4 md:grid-cols-2 xl:grid-cols-4"
       >
-        <select
+        <CustomSelect
           name="workshopid"
-          className="w-full min-w-0 rounded-lg border px-3 py-2 text-center"
+          placeholder="Выберите цех"
           required
-          defaultValue=""
-        >
-          <option value="" disabled>
-            Выберите цех
-          </option>
-          {workshops?.map((workshop) => (
-            <option key={workshop.workshopid} value={workshop.workshopid}>
-              {workshop.workshopid} — {workshop.workshopname}
-            </option>
-          ))}
-        </select>
+          options={
+            workshops?.map((workshop) => ({
+              value: workshop.workshopid,
+              label: `${workshop.workshopid} — ${workshop.workshopname}`,
+            })) ?? []
+          }
+        />
 
-        <select
+        <CustomSelect
           name="productid"
-          className="w-full min-w-0 rounded-lg border px-3 py-2 text-center"
+          placeholder="Выберите изделие"
           required
-          defaultValue=""
-        >
-          <option value="" disabled>
-            Выберите изделие
-          </option>
-          {products?.map((product) => (
-            <option key={product.productid} value={product.productid}>
-              {product.productcode} — {product.productname}
-            </option>
-          ))}
-        </select>
+          options={
+            products?.map((product) => ({
+              value: product.productid,
+              label: `${product.productcode} — ${product.productname}`,
+            })) ?? []
+          }
+        />
 
         <input
           type="number"
           name="quantity"
           placeholder="Количество"
           min={1}
-          className="w-full min-w-0 rounded-lg border px-3 py-2 text-center"
+          className="
+            w-full min-w-0 rounded-xl border px-4 py-2.5 text-center outline-none transition
+            bg-white text-zinc-900 border-zinc-300
+            hover:border-zinc-400 focus:ring-2 focus:ring-blue-500/20
+            dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-700 dark:hover:border-zinc-500
+          "
           required
         />
 
         <button
           type="submit"
-          className="w-full min-w-0 cursor-pointer rounded-lg border px-4 py-2 transition hover:bg-green-200 hover:border-green-900 hover:text-green-900"
+          className="
+            w-full min-w-0 cursor-pointer rounded-xl border px-4 py-2.5 transition
+            bg-white text-zinc-900 border-zinc-300
+            hover:bg-green-100 hover:border-green-700 hover:text-green-900
+            dark:bg-zinc-900 dark:text-zinc-100 dark:border-zinc-700
+            dark:hover:bg-green-900/20 dark:hover:border-green-500 dark:hover:text-green-300
+          "
         >
           Добавить
         </button>
